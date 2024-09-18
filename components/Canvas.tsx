@@ -11,35 +11,40 @@ import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-typescript";
+
+
+import { getExtension, initialCode } from "@/utils/utility";
 interface CanvasProps {
-    language: string;
-    theme: string;
-    icon: string;
-    background?: string;
-    currentPadding?: string;
-
+  language: string;
+  theme: string;
+  icon: string;
+  background?: string;
+  currentPadding?: string;
 }
-function Canvas({
-   
-    theme,
-    language,
-    icon,
-    background,
-    currentPadding,
-  }: CanvasProps) {
 
-    const [width, setWidth] = React.useState(1000);
-    const [height, setHeight] = React.useState<number | null>(500);
-    const [title, setTitle] = React.useState("App");
- 
+function Canvas({
+  language,
+  theme,
+  icon,
+  background,
+  currentPadding,
+}: CanvasProps) {
+  const [width, setWidth] = React.useState(1000);
+  const [height, setHeight] = React.useState<number | null>(500);
+  const [title, setTitle] = React.useState("App");
+  const [code, setCode] = React.useState(initialCode);
 
   const [extension, setExtension] = React.useState(".js");
 
+  useEffect(() => {
+    setExtension(getExtension(language));
+  }, [language]);
 
-
+  const handleCodeChange = (newCode: string) => {
+    setCode(newCode);
+  };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Extract the title without the extension
     const newTitle = e.target.value.split(".")[0];
     setTitle(newTitle);
   };
@@ -61,7 +66,11 @@ function Canvas({
   }, []);
 
   return (
-    <Resizable minHeight={466} minWidth={510} maxHeight={1000}  defaultSize={{
+    <Resizable
+      minHeight={466}
+      minWidth={510}
+      maxWidth={900}
+      defaultSize={{
         width: width,
         height: height || 500,
       }}
@@ -69,15 +78,16 @@ function Canvas({
       className="resize-container relative"
       style={{
         background: background,
-      }}>
-    <div
+      }}
+    >
+      <div
         className="code-block"
         style={{
           padding: currentPadding,
         }}
       >
-       
-        <div className="handle handle-top absolute left-1/2 translate-x-[-50%] top-[-4px] w-2 h-2 
+        <div
+          className="handle handle-top absolute left-1/2 translate-x-[-50%] top-[-4px] w-2 h-2 
             rounded-full bg-slate-300 hover:bg-slate-50"
         ></div>
         <div
@@ -125,7 +135,7 @@ function Canvas({
           </div>
         </div>
         <AceEditor
-          value={"hello"}
+          value={code}
           name="UNIQUE_ID_OF_DIV"
           fontSize={16}
           theme={theme}
@@ -137,11 +147,10 @@ function Canvas({
           highlightActiveLine={false}
           editorProps={{ $blockScrolling: true }}
           className="ace-editor-container"
-      
+          onChange={handleCodeChange}
         />
       </div>
     </Resizable>
-  )
+  );
 }
-
-export default Canvas
+export default Canvas;
