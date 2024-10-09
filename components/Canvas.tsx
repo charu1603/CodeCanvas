@@ -20,6 +20,7 @@ interface CanvasProps {
   icon: string;
   background?: string;
   currentPadding?: string;
+ 
 }
 
 function Canvas({
@@ -28,6 +29,7 @@ function Canvas({
   icon,
   background,
   currentPadding,
+
 }: CanvasProps) {
   const [width, setWidth] = React.useState(1000);
   const [height, setHeight] = React.useState<number | null>(500);
@@ -68,22 +70,26 @@ function Canvas({
   return (
     <Resizable
       minHeight={466}
-      minWidth={510}
-      maxWidth={900}
+      minWidth={410}
+     maxWidth={850}
       defaultSize={{
-        width: width,
-        height: height || 500,
+        width: width || 550,
+        height: height || 800,
+        
       }}
       onResize={handleResize}
       className="resize-container relative"
       style={{
         background: background,
+        boxSizing: 'border-box',
       }}
     >
       <div
         className="code-block"
         style={{
           padding: currentPadding,
+          height:"100%",
+          width:"100%"
         }}
       >
         <div
@@ -148,6 +154,7 @@ function Canvas({
           editorProps={{ $blockScrolling: true }}
           className="ace-editor-container"
           onChange={handleCodeChange}
+         
         />
       </div>
     </Resizable>
