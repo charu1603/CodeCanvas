@@ -28,48 +28,59 @@ const [paddings, setPaddings] = useState(["1rem", "2rem", "3rem", "4rem"]);
 const [currentPadding, setCurrentPadding] = useState(paddings[2]);
 const editorRef = useRef(null);
 
-
 const exportPng = async () => {
-
-  const editorElem = editorRef.current;
+  const editorElem = editorRef.current as HTMLElement | null;
 
   if (editorElem) {
+    // Select elements and define types correctly
+    const handleElems = document.querySelectorAll<HTMLElement>(".handle");
+    const cursorElem = document.querySelector<HTMLElement>(".ace_cursor");
+    const codetitle = document.querySelector<HTMLElement>(".code-title");
+    const codeEditor = document.querySelector<HTMLElement>(".ace_editor");
 
-    const handleElems = document.querySelectorAll(".handle") as any;
-    const cursorElem = document.querySelector(".ace_cursor") as any;
-    const codetitle = document.querySelector(".code-title") as any;
-    const codeEditor = document.querySelector(".ace_editor") as any;
-   
-    handleElems.forEach((elem: any) => {
+    // Hide unnecessary elements for the screenshot
+    handleElems.forEach((elem) => {
       elem.style.display = "none";
     });
-    cursorElem.style.display = "none";
-    codetitle.style.boxShadow = "none";
-    codeEditor.style.boxShadow = "none";
+    if (cursorElem) cursorElem.style.display = "none";
+    if (codetitle) codetitle.style.boxShadow = "none";
+    if (codeEditor) codeEditor.style.boxShadow = "none";
 
+    // Temporarily adjust editor size to capture the full content
+    const originalHeight = editorElem.style.height;
+    editorElem.style.height = `${editorElem.scrollHeight}px`;  // Adjust height to full scrollHeight
+
+    // Capture the editor as a canvas
     const canvas = await html2canvas(editorElem, {
       useCORS: true,
-   
+      scale: 2,  // Improve image quality by scaling
+      windowWidth: editorElem.scrollWidth,  // Capture full width
+      windowHeight: editorElem.scrollHeight, // Capture full height
     });
-  
+
+    // Convert canvas to image
     const image = canvas
       .toDataURL("image/png")
       .replace("image/png", "image/octet-stream");
 
+    // Trigger image download
     const link = document.createElement("a");
     link.download = "code.png";
     link.href = image;
     link.click();
 
-   
-    handleElems.forEach((elem: any) => {
+    // Revert any changes made to the elements
+    editorElem.style.height = originalHeight;  // Restore original height
+    handleElems.forEach((elem) => {
       elem.style.display = "block";
     });
-    cursorElem.style.display = "block";
-    codetitle.style.boxShadow = "0 3px 10px rgba(0, 0, 0, 0.2)";
-    codeEditor.style.boxShadow = "2px 3px 10px rgba(0, 0, 0, 0.2)";
+    if (cursorElem) cursorElem.style.display = "block";
+    if (codetitle) codetitle.style.boxShadow = "0 3px 10px rgba(0, 0, 0, 0.2)";
+    if (codeEditor) codeEditor.style.boxShadow = "2px 3px 10px rgba(0, 0, 0, 0.2)";
   }
 };
+
+
 
   return (
     <main className="flex w-full h-screen md:p-4">
