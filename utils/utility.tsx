@@ -46,6 +46,7 @@ export const languages = [
   export const themes = ["monokai", "twilight", "terminal"];
   
   export const backgrounds = [
+    "linear-gradient(140deg, rgb(165, 142, 251), rgb(233, 191, 248))",
     "linear-gradient(270deg,#514a9d,#24c6dc)",
     "linear-gradient(140deg, rgb(255, 207, 115), rgb(255, 122, 47))",
     "linear-gradient(354deg,#ff75b5,#ffb86c)",
@@ -53,7 +54,7 @@ export const languages = [
     "#000",
     "#fff",
     "linear-gradient(270deg,#fc6767,#ec008c)",
-    "linear-gradient(140deg, rgb(165, 142, 251), rgb(233, 191, 248))",
+    
     "#FF5733", // Red
     "#33FF57", // Green
     "#3357FF", // Blue
