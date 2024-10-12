@@ -91,7 +91,8 @@ const exportPng = async () => {
    
    
     <SelectBackground background={background} setBackground={setBackground} />
-    <SelectPadding paddings={paddings} currentPadding={currentPadding} setCurrentPadding={setCurrentPadding} />
+    <SelectPadding currentPadding={currentPadding} setCurrentPadding={setCurrentPadding} />
+
     <div className="export-btn pt-2">
       <button
         className="flex items-center gap-1 py-1 px-2 bg-blue-400 rounded-md text-sm text-blue-400 
@@ -127,7 +128,8 @@ const exportPng = async () => {
       
       
         <SelectBackground background={background} setBackground={setBackground} />
-        <SelectPadding paddings={paddings} currentPadding={currentPadding} setCurrentPadding={setCurrentPadding} />
+        <SelectPadding currentPadding={currentPadding} setCurrentPadding={setCurrentPadding} />
+
         <div className="export-btn self-center ml-auto pt-4">
           <button
             className="flex items-center gap-3 py-2 px-3 bg-blue-400 rounded-md text-sm text-blue-400 
