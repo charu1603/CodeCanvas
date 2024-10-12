@@ -54,6 +54,16 @@ export const languages = [
     "#fff",
     "linear-gradient(270deg,#fc6767,#ec008c)",
     "linear-gradient(140deg, rgb(165, 142, 251), rgb(233, 191, 248))",
+    "#FF5733", // Red
+    "#33FF57", // Green
+    "#3357FF", // Blue
+    "#F1C40F", // Yellow
+    "#8E44AD", // Purple
+    "#E67E22", // Orange
+    "#3498DB", // Light Blue
+    "#2ECC71", // Light Green
+    "#95A5A6", // Grey
+    "#C0392B", // Dark Red
     
   ];
   
