@@ -88,8 +88,8 @@ const exportPng = async () => {
 <div className="fixed top-0 left-0 w-full bg-[#191919] rounded-b-lg shadow-md p-2 z-10 md:hidden">
   <h2 className="font-black pb-1 text-2xl text-center">CodeCanvas</h2>
   <div className="flex flex-wrap justify-around">
-    <SelectLanguage language={language} setLanguage={setLanguage} seActiveIcon={setActiveIcon} />
-    <SelectTheme theme={theme} setTheme={setTheme} />
+   
+   
     <SelectBackground background={background} setBackground={setBackground} />
     <SelectPadding paddings={paddings} currentPadding={currentPadding} setCurrentPadding={setCurrentPadding} />
     <div className="export-btn pt-2">
@@ -124,8 +124,8 @@ const exportPng = async () => {
       {/* Sidebar for larger screens */}
       <div className="hidden md:block w-[22%] overflow-y-auto no-scrollbar p-5 text-white fixed h-[520px] z-10 bg-[#191919] rounded border border-[#3C3C3C] shadow-md">
         <h2 className="font-black pb-2 text-4xl">CodeCanvas</h2>
-        <SelectLanguage language={language} setLanguage={setLanguage} seActiveIcon={setActiveIcon} />
-        <SelectTheme theme={theme} setTheme={setTheme} />
+      
+      
         <SelectBackground background={background} setBackground={setBackground} />
         <SelectPadding paddings={paddings} currentPadding={currentPadding} setCurrentPadding={setCurrentPadding} />
         <div className="export-btn self-center ml-auto pt-4">
